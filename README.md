@@ -268,4 +268,3 @@ Las contribuciones son bienvenidas. Si deseas colaborar:
 
 ---
 
->>>>>>> 0ead4c2315807dc76b17e407f51f6ab8ba007b2e
