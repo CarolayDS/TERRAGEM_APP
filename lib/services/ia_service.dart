@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/usuario_contexto.dart';
 
 class IAService {
-  final String apiKey = 'AIzaSyDILUt6LvPPSuRaEOgSDVREnsVwQswHpxg';
+  final String apiKey = 'TU API AQUÍ';
 
   Future<String> generarInterpretacion(UsuarioContexto contexto) async {
     if (apiKey.isEmpty || apiKey.contains('TU_API_KEY')) {
