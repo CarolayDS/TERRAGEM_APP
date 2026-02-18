@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ClimaService {
   final supabase = Supabase.instance.client;
-  final String apiKey = '0419f68c51f62cb08f92d9d03301252b'; // tu API key
+  final String apiKey = ''; // tu API key
 
   // Obtiene la ubicación actual
   Future<Position?> _obtenerUbicacionActual() async {
