@@ -52,12 +52,12 @@ class _InterpretacionGeneralScreenState
         setState(() {
           nombreUsuario = usuarioData['nombre'] ?? 'Usuario';
         });
-        print('✅ Usuario cargado: $nombreUsuario');
+        print('✅ User loaded: $nombreUsuario');
       } else {
         nombreUsuario = 'Usuario';
       }
     } catch (e) {
-      print('⚠️ Error al cargar usuario: $e');
+      print('⚠️ Error loading user: $e');
       nombreUsuario = 'Usuario';
     }
   }
@@ -75,20 +75,20 @@ class _InterpretacionGeneralScreenState
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("🌡️ Temperatura: ${clima['temperatura']}°C"),
-            Text("🌡️ Sensación: ${clima['sensacion']}°C"),
+            Text("🌡️ Temperature: ${clima['temperatura']}°C"),
+            Text("🌡️ Feeling: ${clima['sensacion']}°C"),
             Text("📉 Temp min: ${clima['temp_min']}°C"),
             Text("📈 Temp max: ${clima['temp_max']}°C"),
-            Text("💧 Humedad: ${clima['humedad']}%"),
-            Text("🌬️ Viento: ${clima['velocidad_viento']} m/s"),
-            Text("☁️ Estado: ${clima['estado']}"),
-            Text("📝 Descripción: ${clima['descripcion']}"),
+            Text("💧 Humidity: ${clima['humedad']}%"),
+            Text("🌬️ Wind: ${clima['velocidad_viento']} m/s"),
+            Text("☁️ State: ${clima['estado']}"),
+            Text("📝 Description: ${clima['descripcion']}"),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cerrar"),
+            child: const Text("Exit"),
           ),
         ],
       ),
@@ -113,14 +113,14 @@ class _InterpretacionGeneralScreenState
   }
 
   Future<void> _generarInterpretacion() async {
-    print('🧠 Generando interpretación con Gemini...');
+    print('🧠 Generating interpretation with Gemini...');
     try {
       final contexto =
           await contextoService.obtenerUltimoContexto(widget.usuarioAuthId);
 
       if (contexto == null) {
         setState(() {
-          resultado = 'No se encontró información suficiente.';
+          resultado = 'Not enough information was found.';
           cargando = false;
         });
         return;
@@ -140,15 +140,15 @@ class _InterpretacionGeneralScreenState
         cargando = false;
       });
 
-      print('✅ Interpretación generada:\n$respuesta');
+      print('✅ Interpretation generated:\n$respuesta');
 
       if (respuesta.isNotEmpty) {
         await contextoService.guardarInterpretacion(contexto, respuesta);
       }
     } catch (e) {
-      print('⚠️ Error al generar interpretación: $e');
+      print('⚠️ Error when generating interpretation: $e');
       setState(() {
-        resultado = 'Error al generar la interpretación: $e';
+        resultado = 'Error when generating the interpretation: $e';
         cargando = false;
       });
     }
@@ -160,10 +160,10 @@ class _InterpretacionGeneralScreenState
     setState(() => _generandoPdf = true);
 
     try {
-      print('📂 Iniciando generación de PDF...');
+      print('📂 Starting PDF generation...');
 
       final textoInterpretacion =
-          resultado ?? 'No se encontró texto generado por la IA.';
+          resultado ?? 'No AI-generated text was found.';
 
       if (textoInterpretacion.isEmpty) {
         if (!mounted) return;
@@ -174,8 +174,8 @@ class _InterpretacionGeneralScreenState
                 Icon(Icons.error_outline, color: Colors.white),
                 SizedBox(width: 12),
                 Expanded(
-                    child:
-                        Text('No hay texto disponible para generar el PDF.')),
+                    child: Text(
+                        'There is no text available to generate the PDF.')),
               ],
             ),
             backgroundColor: Colors.red,
@@ -188,8 +188,6 @@ class _InterpretacionGeneralScreenState
         setState(() => _generandoPdf = false);
         return;
       }
-
-      // Cargar fuente TrueType
       pw.Font ttf;
       pw.Font ttfBold;
       try {
@@ -205,24 +203,21 @@ class _InterpretacionGeneralScreenState
           ttfBold = ttf;
         }
 
-        print('✅ Fuentes cargadas correctamente');
+        print('✅ Fonts loaded correctly');
       } catch (e) {
-        print('⚠️ Usando fuentes por defecto: $e');
+        print('⚠️ Using default fonts: $e');
         ttf = pw.Font.helvetica();
         ttfBold = pw.Font.helveticaBold();
       }
 
-      // Cargar logo (OPCIONAL)
       pw.ImageProvider? logoImage;
       try {
         final logoData = await rootBundle.load('assets/images/logo.png');
         logoImage = pw.MemoryImage(logoData.buffer.asUint8List());
-        print('✅ Logo cargado');
+        print('✅ Loaded logo');
       } catch (e) {
-        print('⚠️ Logo no encontrado, se usará solo texto: $e');
+        print('⚠️ Logo not found, text only will be used: $e');
       }
-
-      // Dividir el texto en secciones
       final parrafos = textoInterpretacion
           .split('\n')
           .where((p) => p.trim().isNotEmpty)
@@ -238,7 +233,6 @@ class _InterpretacionGeneralScreenState
           pageFormat: PdfPageFormat.a4,
           margin: const pw.EdgeInsets.all(40),
           build: (context) => [
-            // Encabezado con diseño moderno
             pw.Container(
               padding: const pw.EdgeInsets.all(20),
               decoration: pw.BoxDecoration(
@@ -256,7 +250,7 @@ class _InterpretacionGeneralScreenState
                         crossAxisAlignment: pw.CrossAxisAlignment.start,
                         children: [
                           pw.Text(
-                            'ANÁLISIS DE SUELO',
+                            'SOIL ANALYSIS',
                             style: pw.TextStyle(
                               font: ttfBold,
                               fontSize: 24,
@@ -266,7 +260,7 @@ class _InterpretacionGeneralScreenState
                           ),
                           pw.SizedBox(height: 4),
                           pw.Text(
-                            'Reporte Agronómico Profesional',
+                            'Professional Agronomic Report',
                             style: pw.TextStyle(
                               font: ttf,
                               fontSize: 12,
@@ -275,7 +269,6 @@ class _InterpretacionGeneralScreenState
                           ),
                         ],
                       ),
-                      // LOGO O ÍCONO ALTERNATIVO
                       logoImage != null
                           ? pw.Container(
                               width: 60,
@@ -305,7 +298,7 @@ class _InterpretacionGeneralScreenState
 
             pw.SizedBox(height: 20),
 
-            // Información del usuario y cultivo
+            // User information and cultivation
             pw.Container(
               padding: const pw.EdgeInsets.all(16),
               decoration: pw.BoxDecoration(
@@ -316,7 +309,7 @@ class _InterpretacionGeneralScreenState
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Text(
-                    'INFORMACIÓN GENERAL',
+                    'GENERAL INFORMATION',
                     style: pw.TextStyle(
                       font: ttfBold,
                       fontSize: 14,
@@ -325,16 +318,16 @@ class _InterpretacionGeneralScreenState
                   ),
                   pw.SizedBox(height: 10),
                   _buildInfoRow(
-                      ttf, ttfBold, 'Productor:', nombreUsuario ?? 'Usuario'),
-                  _buildInfoRow(ttf, ttfBold, 'Cultivo:',
-                      cultivoNombre ?? 'No especificado'),
-                  _buildInfoRow(ttf, ttfBold, 'Área:', areaCultivo ?? '-'),
-                  _buildInfoRow(ttf, ttfBold, 'Tipo de Suelo:',
-                      tipoSuelo ?? 'No especificado'),
+                      ttf, ttfBold, 'Producer:', nombreUsuario ?? 'User'),
+                  _buildInfoRow(ttf, ttfBold, 'Cultivation:',
+                      cultivoNombre ?? 'Unspecified'),
+                  _buildInfoRow(ttf, ttfBold, 'Area:', areaCultivo ?? '-'),
+                  _buildInfoRow(ttf, ttfBold, 'Type of Soil:',
+                      tipoSuelo ?? 'Unspecified'),
                   _buildInfoRow(
                     ttf,
                     ttfBold,
-                    'Fecha de Análisis:',
+                    'Date of Analysis:',
                     '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
                   ),
                 ],
@@ -343,7 +336,7 @@ class _InterpretacionGeneralScreenState
 
             pw.SizedBox(height: 24),
 
-            // Título de interpretación
+            // Title of interpretation
             pw.Container(
               padding:
                   const pw.EdgeInsets.symmetric(vertical: 10, horizontal: 12),
@@ -352,7 +345,7 @@ class _InterpretacionGeneralScreenState
                 borderRadius: pw.BorderRadius.circular(6),
               ),
               child: pw.Text(
-                'INTERPRETACIÓN Y RECOMENDACIONES',
+                'INTERPRETATION AND RECOMMENDATIONS',
                 style: pw.TextStyle(
                   font: ttfBold,
                   fontSize: 14,
@@ -363,7 +356,7 @@ class _InterpretacionGeneralScreenState
 
             pw.SizedBox(height: 16),
 
-            // Contenido de la interpretación
+            // Content of the interpretation
             pw.Container(
               padding: const pw.EdgeInsets.all(16),
               decoration: pw.BoxDecoration(
@@ -396,14 +389,13 @@ class _InterpretacionGeneralScreenState
 
             pw.SizedBox(height: 30),
 
-            // Footer
             pw.Divider(thickness: 1, color: PdfColors.grey400),
             pw.SizedBox(height: 10),
             pw.Row(
               mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
               children: [
                 pw.Text(
-                  'Documento generado automáticamente',
+                  'Automatically generated document',
                   style: pw.TextStyle(
                     font: ttf,
                     fontSize: 9,
@@ -411,7 +403,7 @@ class _InterpretacionGeneralScreenState
                   ),
                 ),
                 pw.Text(
-                  '© ${DateTime.now().year} - Sistema IA Agrícola',
+                  '© ${DateTime.now().year} - Agricultural AI System',
                   style: pw.TextStyle(
                     font: ttf,
                     fontSize: 9,
@@ -429,7 +421,7 @@ class _InterpretacionGeneralScreenState
           "${dir.path}/analisis_suelo_${DateTime.now().millisecondsSinceEpoch}.pdf");
       await file.writeAsBytes(await pdf.save());
 
-      // Abrir PDF
+      // Open PDF
       await OpenFilex.open(file.path);
 
       if (!mounted) return;
@@ -439,7 +431,7 @@ class _InterpretacionGeneralScreenState
             children: [
               Icon(Icons.check_circle, color: Colors.white),
               SizedBox(width: 12),
-              Text('PDF generado exitosamente'),
+              Text('Successfully generated PDF'),
             ],
           ),
           backgroundColor: const Color(0xFF6B3E26),
@@ -450,7 +442,7 @@ class _InterpretacionGeneralScreenState
         ),
       );
     } catch (e) {
-      print('❌ Error al generar PDF: $e');
+      print('❌ Error while generating PDF:$e');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -458,7 +450,7 @@ class _InterpretacionGeneralScreenState
             children: [
               Icon(Icons.error_outline, color: Colors.white),
               SizedBox(width: 12),
-              Expanded(child: Text('Error al generar PDF: $e')),
+              Expanded(child: Text('Error while generating PDF: $e')),
             ],
           ),
           backgroundColor: Colors.red,
@@ -521,7 +513,7 @@ class _InterpretacionGeneralScreenState
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: Text(
-          'Análisis del Suelo',
+          'Soil Analysis',
           style: TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,
@@ -540,7 +532,7 @@ class _InterpretacionGeneralScreenState
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Analizando con IA...',
+                    'Analyzing with AI...',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[700],
@@ -552,7 +544,6 @@ class _InterpretacionGeneralScreenState
             )
           : Column(
               children: [
-                // Header con ícono
                 Container(
                   width: double.infinity,
                   margin: const EdgeInsets.all(16),
@@ -582,7 +573,7 @@ class _InterpretacionGeneralScreenState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Interpretación IA',
+                              'Interpretation IA',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -591,7 +582,7 @@ class _InterpretacionGeneralScreenState
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Análisis completo de tu suelo',
+                              'Complete analysis of your soil',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],
@@ -604,7 +595,7 @@ class _InterpretacionGeneralScreenState
                   ),
                 ),
 
-                // Contenido del análisis
+                // Content of the analysis
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -622,7 +613,7 @@ class _InterpretacionGeneralScreenState
                     ),
                     child: SingleChildScrollView(
                       child: SelectableText(
-                        resultado ?? 'Sin resultado disponible.',
+                        resultado ?? 'No result available.',
                         style: TextStyle(
                           fontSize: 15,
                           height: 1.6,
@@ -633,7 +624,7 @@ class _InterpretacionGeneralScreenState
                   ),
                 ),
 
-                // Botones de acción
+                // Action buttons
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
@@ -659,7 +650,7 @@ class _InterpretacionGeneralScreenState
                             size: 22,
                           ),
                           label: Text(
-                            _generandoPdf ? 'Generando...' : 'Generar PDF',
+                            _generandoPdf ? 'Generating...' : 'Generate PDF',
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -684,7 +675,7 @@ class _InterpretacionGeneralScreenState
                           onPressed: _verHistorial,
                           icon: const Icon(Icons.history, size: 22),
                           label: const Text(
-                            'Historial',
+                            'History',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -715,15 +706,15 @@ class _InterpretacionGeneralScreenState
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

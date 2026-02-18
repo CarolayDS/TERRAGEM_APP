@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        "Crear Cuenta",
+                        "Create Account",
                         style: GoogleFonts.openSans(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Regístrate para continuar",
+                        "Register to continue",
                         style: TextStyle(
                           fontSize: 16,
                           color: const Color.fromARGB(255, 102, 86, 3),
@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const SizedBox(height: 50),
                       _buildTextField(
                         controller: _nombreController,
-                        label: "Nombre completo",
+                        label: "Full name",
                         icon: Icons.person_outline,
                         iconColor: mediumBrown,
                         fillColor: Colors.white,
@@ -133,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const SizedBox(height: 20),
                       _buildTextField(
                         controller: _emailController,
-                        label: "Correo electrónico",
+                        label: "Email",
                         icon: Icons.email_outlined,
                         iconColor: mediumBrown,
                         fillColor: Colors.white,
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const SizedBox(height: 20),
                       _buildTextField(
                         controller: _passwordController,
-                        label: "Contraseña",
+                        label: "Password",
                         icon: Icons.lock_outline,
                         iconColor: mediumBrown,
                         fillColor: Colors.white,
@@ -167,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
-                              "O",
+                              "Or",
                               style: TextStyle(
                                 color: oliveGray,
                                 fontWeight: FontWeight.w500,
@@ -186,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "¿Ya tienes cuenta? ",
+                            "Do you already have an account? ",
                             style: TextStyle(
                               color: oliveGray,
                               fontSize: 15,
@@ -201,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                               );
                             },
                             child: Text(
-                              "Inicia sesión",
+                              "Login",
                               style: TextStyle(
                                 color: darkBrown,
                                 fontSize: 15,
@@ -328,7 +328,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
                   )
                 : const Text(
-                    "Registrarse",
+                    "Register",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

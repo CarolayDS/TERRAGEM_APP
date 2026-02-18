@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text("Clima en ${clima['ciudad']}"),
+        title: Text("Weather in ${clima['ciudad']}"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cerrar"),
+            child: const Text("Close"),
           ),
         ],
       ),
@@ -91,17 +91,17 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text(
-          "👤 Información del Usuario",
+          "👤 User Information",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Nombre: ${usuarioData!['nombre']}"),
-            Text("Correo: ${usuarioData!['correo']}"),
+            Text("Name: ${usuarioData!['nombre']}"),
+            Text("Email: ${usuarioData!['correo']}"),
             Text(
-              "Registrado el: ${usuarioData!['fecha'].toString().split("T").first}",
+              "Registered on: ${usuarioData!['fecha'].toString().split("T").first}",
               style: const TextStyle(color: Colors.grey),
             ),
           ],
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cerrar"),
+            child: const Text("Exit"),
           ),
           TextButton(
             onPressed: () async {
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             child: const Text(
-              "Cerrar sesión",
+              "Log out",
               style: TextStyle(color: Colors.red),
             ),
           ),
@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Hola, ${usuarioData!['nombre']} 👋',
+                          'Hello, ${usuarioData!['nombre']} 👋',
                           style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 6),
                         const Text(
-                          '¡Bienvenido a TerraGem!',
+                          'Welcome to TerraGem!',
                           style: TextStyle(
                             fontSize: 20,
                             color: Color(0xFF8B5E3C),
@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 20),
                         const Text(
-                          'Ingresa los datos de tu análisis de suelo y recibe sugerencias personalizadas para lograr un crecimiento saludable y eficiente de tus cultivos. 🌾',
+                          'Enter your soil analysis data and receive personalized suggestions for healthy and efficient crop growth. 🌾',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 15, color: Colors.black54),
                         ),
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           child: const Text(
-                            'Interpretar Análisis',
+                            'Interpret Analysis',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -248,14 +248,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           icon: const Icon(Icons.history, color: Colors.white),
                           label: const Text(
-                            'Historial',
+                            'Record',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ],
                     ),
                   )
-                : const Text('No se encontraron datos del usuario'),
+                : const Text('No user data was found'),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -266,15 +266,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

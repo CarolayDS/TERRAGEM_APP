@@ -3,52 +3,50 @@ import 'package:http/http.dart' as http;
 import '../models/usuario_contexto.dart';
 
 class IAService {
-  final String apiKey = ''; //COLOCAR API KEY DE GEMINI
+  final String apiKey = 'AIzaSyDILUt6LvPPSuRaEOgSDVREnsVwQswHpxg';
 
   Future<String> generarInterpretacion(UsuarioContexto contexto) async {
     if (apiKey.isEmpty || apiKey.contains('TU_API_KEY')) {
-      return 'Falta configurar la API key de Gemini.';
+      return 'The Gemini API key needs to be configured.';
     }
 
     final prompt = '''
-Eres un agrónomo experto. Analiza estos datos y proporciona recomendaciones PRÁCTICAS y ESPECÍFICAS de forma CONCISA.
+You are an expert agronomist. It analyzes this data and provides PRACTICAL and SPECIFIC recommendations in a CONCISE way.
+CULTIVATION INFORMATION:
+- Cultivation: ${contexto.cultivo?['cultivos']?['nombre'] ?? 'No especificado'}
+- Area: ${contexto.cultivo?['valor'] ?? ''} ${contexto.cultivo?['unidad'] ?? ''}
+- Type of soil: ${contexto.tipoSuelo?['tipo_suelo']?['nombre'] ?? 'No especificado'}
 
-INFORMACIÓN DEL CULTIVO:
-- Cultivo: ${contexto.cultivo?['cultivos']?['nombre'] ?? 'No especificado'}
-- Área: ${contexto.cultivo?['valor'] ?? ''} ${contexto.cultivo?['unidad'] ?? ''}
-- Tipo de suelo: ${contexto.tipoSuelo?['tipo_suelo']?['nombre'] ?? 'No especificado'}
+CURRENT WEATHER CONDITIONS:
+- Temperature: ${contexto.clima?['temperatura'] ?? ''} °C
+- Humidity: ${contexto.clima?['humedad'] ?? ''} %
+- Condition: ${contexto.clima?['estado'] ?? ''}
 
-CONDICIONES CLIMÁTICAS ACTUALES:
-- Temperatura: ${contexto.clima?['temperatura'] ?? ''} °C
-- Humedad: ${contexto.clima?['humedad'] ?? ''} %
-- Condición: ${contexto.clima?['estado'] ?? ''}
-
-RESULTADOS DEL ANÁLISIS DE SUELO:
+RESULTS OF THE SOIL ANALYSIS:
 - pH: ${contexto.analisis?['ph'] ?? ''}
 - Conductividad Eléctrica (CE): ${contexto.analisis?['ce'] ?? ''} dS/m
-- Materia Orgánica (MO): ${contexto.analisis?['mo'] ?? ''} %
-- Nitrógeno (N): ${contexto.analisis?['n'] ?? ''} ppm
-- Fósforo (P): ${contexto.analisis?['p'] ?? ''} ppm
-- Potasio (K): ${contexto.analisis?['k'] ?? ''} ppm
-- Calcio (Ca): ${contexto.analisis?['ca'] ?? ''} ppm
-- Magnesio (Mg): ${contexto.analisis?['mg'] ?? ''} ppm
+- Organic Matter (MO): ${contexto.analisis?['mo'] ?? ''} %
+- Nitrogen (N): ${contexto.analisis?['n'] ?? ''} ppm
+- Phosphorus (P): ${contexto.analisis?['p'] ?? ''} ppm
+- Potassium (K): ${contexto.analisis?['k'] ?? ''} ppm
+- Calcium (Ca): ${contexto.analisis?['ca'] ?? ''} ppm
+- Magnesium (Mg): ${contexto.analisis?['mg'] ?? ''} ppm
 
-Estructura tu respuesta en 4 secciones breves y directas. Usa títulos en MAYÚSCULAS seguidos de dos puntos. Cada sección debe tener máximo 3-4 oraciones concisas. NO uses asteriscos, guiones o viñetas. Deja una línea en blanco entre secciones.
+Structure your answer into 4 short, straightforward sections. Use CAPITALIZED titles followed by a colon. Each section should have a maximum of 3-4 concise sentences. Do NOT use asterisks, dashes or bullet points. Leave a blank line between sections.
 
-DIAGNÓSTICO DEL SUELO:
-Resume en 3 oraciones el estado del pH y los nutrientes principales (N, P, K). Indica si están óptimos, deficientes o en exceso. Menciona el nivel de materia orgánica.
+DIAGNOSIS OF THE SOIL:
+Summarize in 3 sentences the pH status and the main nutrients (N, P, K). It indicates whether they are optimal, deficient or in excess. It mentions the level of organic matter.
 
-PROBLEMAS PRINCIPALES:
-Identifica los 2 nutrientes más críticos. Explica brevemente el impacto en el cultivo en 2-3 oraciones.
+MAIN PROBLEMS:
+Identify the 2 most critical nutrients. Briefly explain the impact on the crop in 2-3 sentences.
 
-FERTILIZACIÓN RECOMENDADA:
-Recomienda 2 fertilizantes específicos con dosis por hectárea. Ejemplo: "Aplicar 120 kg/ha de urea (46-0-0) al inicio del ciclo". Sé específico pero breve.
+RECOMMENDED FERTILIZATION:
+It recommends 2 specific fertilizers with doses per hectare. Example: "Apply 120 kg/ha of urea (46-0-0) at the beginning of the cycle." Be specific but brief.
 
-MANEJO Y CORRECCIONES:
-Da 2-3 recomendaciones prácticas sobre pH, riego o enmiendas considerando el clima. Máximo 3 oraciones.
+HANDLING AND CORRECTIONS:
+Gives 2-3 practical recommendations on pH, irrigation or amendments considering the climate. Maximum of 3 sentences.
 
-IMPORTANTE: Sé CONCISO. Máximo 15 oraciones en total. Usa lenguaje técnico pero claro. Sin asteriscos, guiones ni viñetas.
-''';
+IMPORTANT: BE CONCISE. Maximum 15 sentences in total. Use technical but clear language. No asterisks, dashes or bullet points.''';
 
     try {
       print('Enviando datos a Gemini...');
@@ -78,7 +76,6 @@ IMPORTANTE: Sé CONCISO. Máximo 15 oraciones en total. Usa lenguaje técnico pe
       print('STATUS CODE: ${response.statusCode}');
 
       if (response.statusCode != 200) {
-        // Fallback a gemini-1.5-flash si el modelo 2.0 no está disponible
         final fallbackUri = Uri.parse(
             'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=$apiKey');
         final fallback = await http
@@ -123,7 +120,8 @@ IMPORTANTE: Sé CONCISO. Máximo 15 oraciones en total. Usa lenguaje técnico pe
     }
   }
 
-  /// Extrae y limpia el texto de la respuesta de Gemini
+  /// Extract and clean the text of the Gemini response
+
   String _extraerTexto(String responseBody) {
     try {
       final data = jsonDecode(responseBody);
@@ -140,27 +138,13 @@ IMPORTANTE: Sé CONCISO. Máximo 15 oraciones en total. Usa lenguaje técnico pe
 
           if (firstPart != null) {
             String text = firstPart['text'] as String;
-
-            // Limpieza del texto
             text = text.trim();
-
-            // Eliminar asteriscos y símbolos de formato markdown
             text = text.replaceAll(RegExp(r'\*+'), '');
             text = text.replaceAll(RegExp(r'_{2,}'), '');
-
-            // Eliminar guiones al inicio de línea (viñetas)
             text = text.replaceAll(RegExp(r'^[-•]\s+', multiLine: true), '');
-
-            // Eliminar símbolos de encabezado markdown
             text = text.replaceAll(RegExp(r'^#{1,6}\s+', multiLine: true), '');
-
-            // Limpiar múltiples saltos de línea consecutivos (máximo 2)
             text = text.replaceAll(RegExp(r'\n{3,}'), '\n\n');
-
-            // Limpiar espacios múltiples
             text = text.replaceAll(RegExp(r' {2,}'), ' ');
-
-            // Limpiar espacios al inicio y final de cada línea
             text = text.split('\n').map((line) => line.trim()).join('\n');
 
             if (text.isNotEmpty) {
@@ -170,10 +154,10 @@ IMPORTANTE: Sé CONCISO. Máximo 15 oraciones en total. Usa lenguaje técnico pe
         }
       }
 
-      return 'No se obtuvo respuesta válida de Gemini.';
+      return 'No valid response was obtained from Gemini.';
     } catch (e) {
-      print('Error al procesar respuesta: $e');
-      return 'Error al procesar la respuesta de Gemini.';
+      print('Error while processing response: $e');
+      return 'Error processing Gemini response.';
     }
   }
 }

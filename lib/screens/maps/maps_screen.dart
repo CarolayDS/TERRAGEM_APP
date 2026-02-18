@@ -66,8 +66,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                   Icon(Icons.location_off, color: Colors.white),
                   SizedBox(width: 12),
                   Expanded(
-                    child:
-                        Text('Permisos de ubicación denegados permanentemente'),
+                    child: Text('Location permissions permanently denied'),
                   ),
                 ],
               ),
@@ -94,8 +93,8 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
         position: _ubicacionActual!,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
         infoWindow: const InfoWindow(
-          title: '📍 Tu ubicación',
-          snippet: 'Estás aquí',
+          title: '📍 Your location',
+          snippet: 'You are here',
         ),
       ));
 
@@ -103,11 +102,11 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
 
       setState(() => _cargando = false);
     } catch (e) {
-      print('❌ Error al obtener ubicación: $e');
+      print('❌ Error while getting location: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error al obtener ubicación: $e'),
+            content: Text('Error while getting location: $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -117,13 +116,13 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
   }
 
   Future<void> _buscarTiendasCercanas(double lat, double lng) async {
-    final apiKey = ''; //COLOCAR API KEY DE GOOGLE MAPS
+    final apiKey = 'AIzaSyCp-guZIgHZ14VMAuKNHKMegs75mjvqyGc';
 
-    // Palabras clave para buscar tiendas de fertilizantes y agro
+    // Keywords to search for fertilizer and agro stores
     final keywords = _tipoBusqueda == 'fertilizantes'
-        ? 'fertilizantes agroquímicos agrícola'
+        ? 'agrochemical fertilizers agricultural'
         : _searchController.text.isEmpty
-            ? 'tienda agrícola'
+            ? 'agricultural store'
             : _searchController.text;
 
     final url = Uri.parse(
@@ -140,7 +139,6 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
         final data = jsonDecode(response.body);
         _tiendas.clear();
 
-        // Limpiar marcadores anteriores excepto ubicación actual
         _markers
             .removeWhere((marker) => marker.markerId.value != 'mi_ubicacion');
 
@@ -183,7 +181,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                     Icon(Icons.info_outline, color: Colors.white),
                     SizedBox(width: 12),
                     Expanded(
-                      child: Text('No se encontraron tiendas cercanas'),
+                      child: Text('No stores were found nearby'),
                     ),
                   ],
                 ),
@@ -197,10 +195,10 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
           }
         }
       } else {
-        print('❌ Error al obtener tiendas: ${response.statusCode}');
+        print('❌ Error when getting stores: ${response.statusCode}');
       }
     } catch (e) {
-      print('❌ Error en búsqueda: $e');
+      print('❌ Error in search: $e');
     }
   }
 
@@ -273,7 +271,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                   _moverCamaraA(ubicacion);
                 },
                 icon: Icon(Icons.my_location),
-                label: Text('Ver en el mapa'),
+                label: Text('See on the map'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
                   foregroundColor: Colors.white,
@@ -317,7 +315,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: Text(
-          'Tiendas Agrícolas',
+          'Agricultural Shops',
           style: TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,
@@ -328,7 +326,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
           IconButton(
             icon: Icon(Icons.refresh, color: primaryColor),
             onPressed: _obtenerUbicacionYTiendas,
-            tooltip: 'Actualizar ubicación',
+            tooltip: 'Update location',
           ),
         ],
       ),
@@ -343,7 +341,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Buscando tiendas cercanas...',
+                    'Looking for nearby shops...',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[700],
@@ -355,7 +353,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
             )
           : Column(
               children: [
-                // Panel de búsqueda
+                // Search panel
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -370,40 +368,40 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                   ),
                   child: Column(
                     children: [
-                      // Filtros rápidos
+                      // Quick filters
                       Row(
                         children: [
                           Expanded(
                             child: _buildFiltroChip(
-                              'Fertilizantes',
-                              'fertilizantes',
+                              'Fertilizers',
+                              'fertilizers',
                               Icons.agriculture,
                             ),
                           ),
                           SizedBox(width: 8),
                           Expanded(
                             child: _buildFiltroChip(
-                              'Semillas',
-                              'semillas',
+                              'Seeds',
+                              'seeds',
                               Icons.eco,
                             ),
                           ),
                           SizedBox(width: 8),
                           Expanded(
                             child: _buildFiltroChip(
-                              'Herramientas',
-                              'herramientas',
+                              'Tools',
+                              'tools',
                               Icons.build,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 12),
-                      // Buscador personalizado
+                      // Custom search engine
                       TextField(
                         controller: _searchController,
                         decoration: InputDecoration(
-                          hintText: 'Buscar tienda específica...',
+                          hintText: 'Search for a specific store...',
                           prefixIcon: Icon(Icons.search, color: primaryColor),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.send, color: primaryColor),
@@ -426,12 +424,12 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                   ),
                 ),
 
-                // Mapa
+                // Map
                 Expanded(
                   child: _ubicacionActual == null
                       ? Center(
                           child: Text(
-                            'No se pudo obtener la ubicación',
+                            'Could not get the location',
                             style: TextStyle(color: Colors.grey[600]),
                           ),
                         )
@@ -453,7 +451,6 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                                 _controller.complete(controller);
                               },
                             ),
-                            // Contador de tiendas
                             if (_tiendas.isNotEmpty)
                               Positioned(
                                 top: 16,
@@ -499,7 +496,7 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
                         ),
                 ),
 
-                // Lista de tiendas (expandible)
+                // List of stores (expandable)
                 if (_tiendas.isNotEmpty)
                   Container(
                     height: 110,
@@ -605,15 +602,15 @@ class _TiendasMapaScreenState extends State<TiendasMapaScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

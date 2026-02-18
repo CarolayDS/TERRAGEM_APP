@@ -19,7 +19,7 @@ class HectareasScreen extends StatefulWidget {
 class _HectareasScreenState extends State<HectareasScreen> {
   final _formKey = GlobalKey<FormState>();
   final _controller = TextEditingController();
-  String unidad = 'hectáreas';
+  String unidad = 'hectares';
   final areaService = CultivoAreaService();
   int _selectedIndex = 1;
 
@@ -44,7 +44,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
               children: const [
                 Icon(Icons.error_outline, color: Colors.white),
                 SizedBox(width: 12),
-                Text('Por favor ingresa un número válido'),
+                Text('Please enter a valid number'),
               ],
             ),
             backgroundColor: Colors.red,
@@ -71,7 +71,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
               children: [
                 const Icon(Icons.check_circle, color: Colors.white),
                 const SizedBox(width: 12),
-                Text('Guardado: $valor $unidad ✅'),
+                Text('Save: $valor $unidad ✅'),
               ],
             ),
             backgroundColor: const Color(0xFF6B3E26),
@@ -99,7 +99,15 @@ class _HectareasScreenState extends State<HectareasScreen> {
               children: [
                 const Icon(Icons.error_outline, color: Colors.white),
                 const SizedBox(width: 12),
-                Text('Error al guardar: $e'),
+                Expanded(
+                  child: Text(
+                    'Error saving: $e',
+                    overflow: TextOverflow
+                        .ellipsis, // opcional: corta si es muy largo
+                    maxLines: 2, // opcional: máximo 2 líneas
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
             ),
             backgroundColor: Colors.red,
@@ -125,7 +133,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: const Text(
-          'Registrar Área del Cultivo',
+          'Register Crop Area',
           style: TextStyle(
             color: Color(0xFF6B3E26),
             fontWeight: FontWeight.bold,
@@ -169,7 +177,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '¿Cuánta área tienes?',
+                              '¿How much area do you have?',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -178,7 +186,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Ingresa el tamaño de tu terreno para un mejor análisis',
+                              'Enter the size of your land for a better analysis',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],
@@ -226,7 +234,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                           ),
                           const SizedBox(width: 12),
                           const Text(
-                            'Datos del terreno',
+                            'Terrain data',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -239,7 +247,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
 
                       // Campo de cantidad
                       const Text(
-                        'Cantidad',
+                        'Amount',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -257,7 +265,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Ejemplo: 2.5',
+                          hintText: 'Example: 2.5',
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                             fontWeight: FontWeight.normal,
@@ -300,7 +308,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor ingresa una cantidad';
+                            return 'Please enter an amount';
                           }
                           return null;
                         },
@@ -309,7 +317,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
 
                       // Campo de unidad
                       const Text(
-                        'Unidad de medida',
+                        'Unit of measurement',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -321,22 +329,22 @@ class _HectareasScreenState extends State<HectareasScreen> {
                         value: unidad,
                         items: const [
                           DropdownMenuItem(
-                            value: 'hectáreas',
+                            value: 'hectares',
                             child: Row(
                               children: [
                                 Icon(Icons.landscape, size: 20),
                                 SizedBox(width: 12),
-                                Text('Hectáreas'),
+                                Text('Hectares'),
                               ],
                             ),
                           ),
                           DropdownMenuItem(
-                            value: 'metros cuadrados',
+                            value: 'square meters',
                             child: Row(
                               children: [
                                 Icon(Icons.square_foot, size: 20),
                                 SizedBox(width: 12),
-                                Text('Metros cuadrados'),
+                                Text('square meters'),
                               ],
                             ),
                           ),
@@ -403,7 +411,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Esta información nos ayudará a calcular mejor los recursos necesarios para tu cultivo',
+                          'This information will help us better calculate the resources needed for your crop',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[800],
@@ -423,7 +431,7 @@ class _HectareasScreenState extends State<HectareasScreen> {
                     onPressed: _guardarDatos,
                     icon: const Icon(Icons.check_circle_outline, size: 24),
                     label: const Text(
-                      'Continuar',
+                      'Continue',
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -454,15 +462,15 @@ class _HectareasScreenState extends State<HectareasScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

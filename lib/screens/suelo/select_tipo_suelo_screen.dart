@@ -58,7 +58,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
             children: [
               const Icon(Icons.error_outline, color: Colors.white),
               const SizedBox(width: 12),
-              Expanded(child: Text('Error al cargar tipos de suelo: $e')),
+              Expanded(child: Text('Error loading soil types: $e')),
             ],
           ),
           backgroundColor: Colors.red,
@@ -90,7 +90,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
             children: [
               const Icon(Icons.check_circle, color: Colors.white),
               const SizedBox(width: 12),
-              Text('${tipoSuelo.nombre} seleccionado ✅'),
+              Text('${tipoSuelo.nombre} selected ✅'),
             ],
           ),
           backgroundColor: const Color(0xFF6B3E26),
@@ -109,7 +109,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
             children: [
               const Icon(Icons.error_outline, color: Colors.white),
               const SizedBox(width: 12),
-              Expanded(child: Text('Error al registrar selección: $e')),
+              Expanded(child: Text('Error registering selection: $e')),
             ],
           ),
           backgroundColor: Colors.red,
@@ -143,7 +143,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: const Text(
-          'Selecciona el Tipo de Suelo',
+          'Select the Soil Type',
           style: TextStyle(
             color: Color(0xFF6B3E26),
             fontWeight: FontWeight.bold,
@@ -182,7 +182,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '¿Qué tipo de suelo tienes?',
+                        '¿What type of soil do you have?',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Conocer tu suelo nos ayuda a darte mejores recomendaciones',
+                        'Knowing your soil helps us give you better recommendations',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[700],
@@ -362,7 +362,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Has seleccionado: ${tipoSueloSeleccionado!.nombre}',
+                            'You have selected: ${tipoSueloSeleccionado!.nombre}',
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -379,7 +379,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.arrow_forward, size: 24),
                       label: const Text(
-                        'Continuar con Parámetros',
+                        'Continue with Parameters',
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -401,7 +401,7 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
                             builder: (_) => IngresarParametrosPage(
                               usuarioAuthId: widget.usuarioAuthId,
                               cultivoId: int.parse(widget.cultivoId),
-                              cultivoNombre: 'Mi Cultivo',
+                              cultivoNombre: 'My Cultivation',
                             ),
                           ),
                         );
@@ -422,15 +422,15 @@ class _SeleccionarTipoSueloPageState extends State<SeleccionarTipoSueloPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

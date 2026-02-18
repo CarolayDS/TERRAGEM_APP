@@ -48,7 +48,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
           children: [
             const Icon(Icons.check_circle, color: Colors.white),
             const SizedBox(width: 12),
-            Text('${cultivo.nombre} seleccionado ✅'),
+            Text('${cultivo.nombre} selected ✅'),
           ],
         ),
         backgroundColor: const Color(0xFF6B3E26),
@@ -96,7 +96,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: const Text(
-          'Selecciona tu Cultivo',
+          'Select your crop',
           style: TextStyle(
             color: Color(0xFF6B3E26),
             fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '¿Qué vas a cultivar?',
+                        'What are you going to grow?',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Selecciona el cultivo para recibir recomendaciones personalizadas',
+                        'Select the crop to receive personalized recommendations',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[700],
@@ -314,7 +314,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Has seleccionado: ${cultivoSeleccionado!.nombre}',
+                            'You have selected: ${cultivoSeleccionado!.nombre}',
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -331,7 +331,7 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.landscape, size: 24),
                       label: const Text(
-                        'Registrar Área del Cultivo',
+                        'Register Crop Area',
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -373,15 +373,15 @@ class _SeleccionarCultivoPageState extends State<SeleccionarCultivoPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

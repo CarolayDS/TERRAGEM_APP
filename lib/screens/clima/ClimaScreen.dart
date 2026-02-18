@@ -51,7 +51,7 @@ class _ClimaScreenState extends State<ClimaScreen> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: const Text(
-          'Clima Actual',
+          'Current Weather',
           style: TextStyle(
             color: Color(0xFF6B3E26),
             fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class _ClimaScreenState extends State<ClimaScreen> {
                         Column(
                           children: [
                             const Text(
-                              'Mínima',
+                              'Minimum',
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 14,
@@ -171,7 +171,7 @@ class _ClimaScreenState extends State<ClimaScreen> {
                         Column(
                           children: [
                             const Text(
-                              'Máxima',
+                              'Maximum',
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 14,
@@ -213,21 +213,21 @@ class _ClimaScreenState extends State<ClimaScreen> {
                   children: [
                     _buildDetailRow(
                       icon: Icons.thermostat,
-                      label: 'Sensación térmica',
+                      label: 'Feels like heat',
                       value: '$sensacion°C',
                       color: const Color(0xFFFF6B6B),
                     ),
                     const Divider(height: 24),
                     _buildDetailRow(
                       icon: Icons.water_drop,
-                      label: 'Humedad',
+                      label: 'Humidity',
                       value: '$humedad%',
                       color: const Color(0xFF4ECDC4),
                     ),
                     const Divider(height: 24),
                     _buildDetailRow(
                       icon: Icons.air,
-                      label: 'Velocidad del viento',
+                      label: 'Wind speed',
                       value: '$viento m/s',
                       color: const Color(0xFF95E1D3),
                     ),
@@ -243,7 +243,7 @@ class _ClimaScreenState extends State<ClimaScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.agriculture_outlined, size: 26),
                   label: const Text(
-                    'Seleccionar Cultivo',
+                    'Select Crop',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -275,7 +275,7 @@ class _ClimaScreenState extends State<ClimaScreen> {
 
               // Texto informativo
               Text(
-                'Los datos climáticos ayudarán a personalizar las recomendaciones para tu cultivo',
+                'Climate data will help personalize recommendations for your crop',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -296,15 +296,15 @@ class _ClimaScreenState extends State<ClimaScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

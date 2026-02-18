@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen>
 
                       // Título con estilo
                       Text(
-                        "Iniciar Sesión",
+                        "Login",
                         style: GoogleFonts.openSans(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Inicia sesión para continuar",
+                        "Log in to continue",
                         style: TextStyle(
                           fontSize: 16,
                           color: const Color.fromARGB(255, 102, 86, 3),
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen>
                       // Campo de Correo mejorado
                       _buildTextField(
                         controller: _emailController,
-                        label: "Correo electrónico",
+                        label: "Email",
                         icon: Icons.email_outlined,
                         iconColor: mediumBrown,
                         fillColor: Colors.white,
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen>
                       // Campo de Contraseña mejorado
                       _buildTextField(
                         controller: _passwordController,
-                        label: "Contraseña",
+                        label: "Password",
                         icon: Icons.lock_outline,
                         iconColor: mediumBrown,
                         fillColor: Colors.white,
@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen>
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
-                              "O",
+                              "Or",
                               style: TextStyle(
                                 color: oliveGray,
                                 fontWeight: FontWeight.w500,
@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "¿No tienes cuenta? ",
+                            "Don't you have an account? ",
                             style: TextStyle(
                               color: oliveGray,
                               fontSize: 15,
@@ -204,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen>
                               );
                             },
                             child: Text(
-                              "Regístrate",
+                              "Register",
                               style: TextStyle(
                                 color: darkBrown,
                                 fontSize: 15,
@@ -331,7 +331,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                   )
                 : const Text(
-                    "Ingresar",
+                    "Get into",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

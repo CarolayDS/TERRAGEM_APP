@@ -41,7 +41,7 @@ class _HistorialPageState extends State<HistorialPage> {
         });
       }
     } catch (e) {
-      print('⚠️ Error al cargar usuario: $e');
+      print('⚠️ Error loading user: $e');
       nombreUsuario = 'Usuario';
     }
   }
@@ -54,25 +54,25 @@ class _HistorialPageState extends State<HistorialPage> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text("Clima en ${clima['ciudad']}"),
+        title: Text("Weather in ${clima['ciudad']}"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("🌡️ Temperatura: ${clima['temperatura']}°C"),
-            Text("🌡️ Sensación: ${clima['sensacion']}°C"),
+            Text("🌡️ Temperature: ${clima['temperatura']}°C"),
+            Text("🌡️ Feeling: ${clima['sensacion']}°C"),
             Text("📉 Temp min: ${clima['temp_min']}°C"),
             Text("📈 Temp max: ${clima['temp_max']}°C"),
-            Text("💧 Humedad: ${clima['humedad']}%"),
-            Text("🌬️ Viento: ${clima['velocidad_viento']} m/s"),
-            Text("☁️ Estado: ${clima['estado']}"),
-            Text("📝 Descripción: ${clima['descripcion']}"),
+            Text("💧 Humidity: ${clima['humedad']}%"),
+            Text("🌬️ Wind: ${clima['velocidad_viento']} m/s"),
+            Text("☁️ State: ${clima['estado']}"),
+            Text("📝 Description: ${clima['descripcion']}"),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cerrar"),
+            child: const Text("Exit"),
           ),
         ],
       ),
@@ -115,10 +115,10 @@ class _HistorialPageState extends State<HistorialPage> {
     pw.Font? ttf;
 
     try {
-      print(
-          '📂 Iniciando generación de PDF para interpretación #${index + 1}...');
+      print('📂 Starting PDF generation for interpretation #${index + 1}...');
 
-      final resultadoOriginal = item['resultado_ia'] ?? 'Sin interpretación';
+      final resultadoOriginal =
+          item['resultado_ia'] ?? 'Without interpretation';
       final resultado = _limpiarTextoParaPdf(resultadoOriginal);
 
       final fechaStr = item['fecha']?.toString() ?? DateTime.now().toString();
@@ -130,9 +130,9 @@ class _HistorialPageState extends State<HistorialPage> {
         final fontData =
             await rootBundle.load('assets/fonts/NotoSans-Regular.ttf');
         ttf = pw.Font.ttf(fontData);
-        print('✅ Fuente NotoSans cargada correctamente');
+        print('✅ Font NotoSans loaded correctly');
       } catch (e) {
-        print('⚠️ No se pudo cargar NotoSans, usando Helvetica: $e');
+        print('⚠️ Could not load NotoSans, using Helvetica: $e');
         ttf = pw.Font.helvetica();
       }
 
@@ -142,7 +142,7 @@ class _HistorialPageState extends State<HistorialPage> {
           resultado.split('\n').where((p) => p.trim().isNotEmpty).toList();
 
       if (parrafos.isEmpty) {
-        parrafos.add('Sin contenido disponible');
+        parrafos.add('No content available');
       }
 
       List<pw.Widget> construirParrafos() {
@@ -212,7 +212,7 @@ class _HistorialPageState extends State<HistorialPage> {
           build: (context) => [
             pw.Center(
               child: pw.Text(
-                'Reporte de Interpretación del Análisis de Suelo',
+                'Interpretation Report of the Soil Analysis',
                 style: pw.TextStyle(
                   font: ttf,
                   fontSize: 20,
@@ -225,15 +225,15 @@ class _HistorialPageState extends State<HistorialPage> {
             pw.Divider(thickness: 2, color: PdfColors.brown),
             pw.SizedBox(height: 16.0),
             pw.Text(
-              'Usuario: ${nombreUsuario ?? widget.usuarioAuthId}',
+              'User: ${nombreUsuario ?? widget.usuarioAuthId}',
               style: pw.TextStyle(font: ttf, fontSize: 12),
             ),
             pw.Text(
-              'Fecha: $fechaFormateada',
+              'Date: $fechaFormateada',
               style: pw.TextStyle(font: ttf, fontSize: 12),
             ),
             pw.Text(
-              'Interpretación #${index + 1}',
+              'Interpretation #${index + 1}',
               style: pw.TextStyle(
                 font: ttf,
                 fontSize: 12,
@@ -242,7 +242,7 @@ class _HistorialPageState extends State<HistorialPage> {
             ),
             pw.SizedBox(height: 20.0),
             pw.Text(
-              'Resultado de la Interpretación:',
+              'Result of the Interpretation:',
               style: pw.TextStyle(
                 font: ttf,
                 fontSize: 14,
@@ -257,7 +257,7 @@ class _HistorialPageState extends State<HistorialPage> {
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
-                'Generado automáticamente por IA - ${DateTime.now().year}',
+                'Automatically generated by AI- ${DateTime.now().year}',
                 style: pw.TextStyle(
                   font: ttf,
                   fontSize: 10,
@@ -281,13 +281,13 @@ class _HistorialPageState extends State<HistorialPage> {
 
       if (!mounted) return;
 
-      print('✅ PDF guardado en: ${file.path}');
+      print('✅ PDF saved in: ${file.path}');
 
       await OpenFilex.open(file.path);
 
       if (!mounted) return;
 
-      print('✅ PDF abierto correctamente');
+      print('✅ PDF opened correctly');
 
       messenger.showSnackBar(
         SnackBar(
@@ -295,7 +295,7 @@ class _HistorialPageState extends State<HistorialPage> {
             children: [
               Icon(Icons.check_circle, color: Colors.white),
               SizedBox(width: 12),
-              Text('PDF generado exitosamente'),
+              Text('Successfully generated PDF'),
             ],
           ),
           backgroundColor: const Color(0xFF6B3E26),
@@ -307,7 +307,7 @@ class _HistorialPageState extends State<HistorialPage> {
         ),
       );
     } catch (e, stackTrace) {
-      print('❌ Error al generar PDF: $e');
+      print('❌ Error while generating PDF: $e');
       print('Stack trace: $stackTrace');
 
       if (!mounted) return;
@@ -350,7 +350,7 @@ class _HistorialPageState extends State<HistorialPage> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: Text(
-          'Historial de Análisis',
+          'Analysis history',
           style: TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,
@@ -372,7 +372,7 @@ class _HistorialPageState extends State<HistorialPage> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Cargando historial...',
+                    'Loading history...',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[700],
@@ -392,7 +392,7 @@ class _HistorialPageState extends State<HistorialPage> {
                   Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
                   const SizedBox(height: 16),
                   Text(
-                    'Error al cargar historial',
+                    'Error loading history',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -424,7 +424,7 @@ class _HistorialPageState extends State<HistorialPage> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Sin historial de análisis',
+                    'No analysis history',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -433,7 +433,7 @@ class _HistorialPageState extends State<HistorialPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Los análisis que realices aparecerán aquí',
+                    'The analyses you perform will appear here',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
@@ -449,8 +449,9 @@ class _HistorialPageState extends State<HistorialPage> {
             itemCount: historial.length,
             itemBuilder: (context, index) {
               final item = historial[index];
-              final resultado = item['resultado_ia'] ?? 'Sin interpretación';
-              final fechaStr = item['fecha']?.toString() ?? 'Sin fecha';
+              final resultado =
+                  item['resultado_ia'] ?? 'Without interpretation';
+              final fechaStr = item['fecha']?.toString() ?? 'No date';
               final fechaFormateada = fechaStr.length > 19
                   ? fechaStr.substring(0, 19).replaceAll('T', ' ')
                   : (fechaStr.length > 10
@@ -491,7 +492,7 @@ class _HistorialPageState extends State<HistorialPage> {
                       ),
                     ),
                     title: Text(
-                      'Análisis ${index + 1}',
+                      'Analysis ${index + 1}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -546,8 +547,8 @@ class _HistorialPageState extends State<HistorialPage> {
                           ),
                           label: Text(
                             (_generandoPdf[index] ?? false)
-                                ? 'Generando PDF...'
-                                : 'Generar PDF',
+                                ? 'Generating PDF...'
+                                : 'Generate PDF',
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -583,15 +584,15 @@ class _HistorialPageState extends State<HistorialPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),

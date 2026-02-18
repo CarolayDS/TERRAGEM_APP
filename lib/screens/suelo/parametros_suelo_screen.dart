@@ -64,7 +64,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
             children: [
               const Icon(Icons.error_outline, color: Colors.white),
               const SizedBox(width: 12),
-              Expanded(child: Text('Error al cargar parámetros: $e')),
+              Expanded(child: Text('Error loading parameters: $e')),
             ],
           ),
           backgroundColor: Colors.red,
@@ -98,7 +98,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
               children: const [
                 Icon(Icons.check_circle, color: Colors.white),
                 SizedBox(width: 12),
-                Text('✅ Parámetros guardados correctamente'),
+                Text('✅ Parameters saved correctly'),
               ],
             ),
             backgroundColor: const Color(0xFF6B3E26),
@@ -125,7 +125,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
               children: [
                 const Icon(Icons.error_outline, color: Colors.white),
                 const SizedBox(width: 12),
-                Expanded(child: Text('Error al guardar: $e')),
+                Expanded(child: Text('Error saving: $e')),
               ],
             ),
             backgroundColor: Colors.red,
@@ -142,16 +142,15 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
   IconData _getIconForParameter(String paramName) {
     final name = paramName.toLowerCase();
     if (name.contains('ph')) return Icons.science_outlined;
-    if (name.contains('nitrógeno') || name.contains('nitrogeno')) {
-      return Icons.bubble_chart;
-    }
-    if (name.contains('fósforo') || name.contains('fosforo')) {
-      return Icons.blur_on;
-    }
-    if (name.contains('potasio')) return Icons.scatter_plot;
-    if (name.contains('temperatura')) return Icons.thermostat_outlined;
-    if (name.contains('humedad')) return Icons.water_drop_outlined;
-    if (name.contains('conductividad')) return Icons.bolt_outlined;
+    if (name.contains('nitrogen')) return Icons.bubble_chart;
+    if (name.contains('phosphorus')) return Icons.blur_on;
+    if (name.contains('potassium')) return Icons.scatter_plot;
+    if (name.contains('temperature')) return Icons.thermostat_outlined;
+    if (name.contains('humidity')) return Icons.water_drop_outlined;
+    if (name.contains('electrical conductivity')) return Icons.bolt_outlined;
+    if (name.contains('organic matter')) return Icons.eco_outlined;
+    if (name.contains('calcium')) return Icons.grain;
+    if (name.contains('magnesium')) return Icons.grass;
     return Icons.analytics_outlined;
   }
 
@@ -176,7 +175,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
         elevation: 0,
         iconTheme: IconThemeData(color: primaryColor),
         title: Text(
-          'Parámetros del Suelo',
+          'Soil Parameters',
           style: TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,
@@ -188,7 +187,6 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
         key: _formKey,
         child: Column(
           children: [
-            // Header con información
             Container(
               width: double.infinity,
               margin: const EdgeInsets.all(16),
@@ -218,7 +216,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Análisis de Suelo',
+                          'Soil Analysis',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -227,7 +225,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Ingresa los valores de tu análisis de laboratorio',
+                          'Enter your lab test results',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[700],
@@ -240,7 +238,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
               ),
             ),
 
-            // Lista de parámetros
+            // List of parameters
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -264,7 +262,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Título del parámetro con ícono
+                        // Parameter title with icon
                         Row(
                           children: [
                             Container(
@@ -295,7 +293,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                                   if (param.unidad != null &&
                                       param.unidad!.isNotEmpty)
                                     Text(
-                                      'Unidad: ${param.unidad}',
+                                      'Unit: ${param.unidad}',
                                       style: TextStyle(
                                         fontSize: 13,
                                         color: Colors.grey[600],
@@ -308,7 +306,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Campo de entrada
+                        // Input field
                         TextFormField(
                           controller: _controllers[param.nombreParametro],
                           keyboardType: const TextInputType.numberWithOptions(
@@ -319,7 +317,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                             fontWeight: FontWeight.w600,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Ingresa el valor',
+                            hintText: 'Enter the value',
                             hintStyle: TextStyle(
                               color: Colors.grey[400],
                               fontWeight: FontWeight.normal,
@@ -362,22 +360,22 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Ingresa un valor';
+                              return 'Enter a value';
                             }
                             final numValue = double.tryParse(value);
                             if (numValue == null) {
-                              return 'Debe ser un número';
+                              return 'It must be a number';
                             }
                             if (numValue < param.valorMinimo ||
                                 numValue > param.valorMaximo) {
-                              return 'Fuera del rango permitido';
+                              return 'Out of permitted range';
                             }
                             return null;
                           },
                         ),
                         const SizedBox(height: 12),
 
-                        // Rango permitido
+                        // Allowed range
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 12,
@@ -400,7 +398,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Rango: ${param.valorMinimo} - ${param.valorMaximo}',
+                                  'Range: ${param.valorMinimo} - ${param.valorMaximo}',
                                   style: const TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -418,7 +416,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
               ),
             ),
 
-            // Botón de guardar
+            // Save button
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -438,7 +436,7 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
                   onPressed: _guardarAnalisis,
                   icon: const Icon(Icons.check_circle_outline, size: 24),
                   label: const Text(
-                    'Guardar y Ver Análisis',
+                    'Save and View Analysis',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -468,15 +466,15 @@ class _IngresarParametrosPageState extends State<IngresarParametrosPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'Clima',
+            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Inicio',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store_mall_directory),
-            label: 'Tiendas',
+            label: 'Stores',
           ),
         ],
       ),
