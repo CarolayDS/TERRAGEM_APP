@@ -1,51 +1,51 @@
 
-# 🌱 TerraGem – Aplicativo móvil para la Interpretación de Análisis de Suelo
+# 🌱 TerraGem – Mobile App for Soil Analysis Interpretation
 
-**Aplicación móvil desarrollada en Flutter e Inteligencia Artificial (IA)** para la **interpretación automatizada de análisis de suelo agrícolas**, con el propósito de apoyar la toma de decisiones agronómicas sostenibles.
+**Mobile application developed in Flutter and Artificial Intelligence (AI)** for the **automated interpretation of agricultural soil analyses**, with the purpose of supporting sustainable agronomic decision-making.
 
-> Proyecto de investigación desarrollado en la **Universidad Nacional de Cañete (UNDC)**, orientado a la transformación digital del sector agrícola mediante el uso de tecnologías accesibles y de alto impacto.
-
----
-
-## 🧠 Descripción del Proyecto
-
-**TerraGem** es una herramienta móvil que permite a los usuarios **interpretar resultados de análisis de suelo** mediante un modelo de **inteligencia artificial generativa** (Google Gemini).  
-A partir de los valores físico-químicos del suelo, la app genera **recomendaciones de manejo personalizadas** según el tipo de cultivo, el clima y las condiciones del terreno.
-
-El sistema integra múltiples servicios tecnológicos:
-
-- **Flutter:** desarrollo multiplataforma para Android e iOS.  
-- **Supabase:** backend en la nube para autenticación y almacenamiento de datos.  
-- **Gemini API:** inteligencia artificial para la interpretación semántica del análisis de suelo.  
-- **OpenWeatherMap:** módulo de pronóstico climático en tiempo real.  
-- **Google Maps API:** visualización geográfica y localización de tiendas agrícolas.
+> Research project developed at the **National University of Cañete (UNDC)**, aimed at the digital transformation of the agricultural sector through the use of accessible, high-impact technologies.
 
 ---
 
-## 🌾 Funcionalidades Principales
+## 🧠 Project Description
 
-- 🔍 **Interpretación automática** de parámetros físico-químicos del suelo.  
-- 🧠 **IA generativa (Gemini API)** para análisis contextual y recomendaciones personalizadas.  
-- ☁️ **Supabase** para gestión de usuarios, cultivos y registros históricos.  
-- 🌦️ **Clima local** integrado mediante OpenWeatherMap API.  
-- 📜 **Historial PDF** de resultados con exportación profesional.  
-- 🗺️ **Mapa interactivo** con Google Maps para localizar tiendas agrícolas.  
-- 📱 **Interfaz moderna y responsiva** diseñada en Flutter.  
-- 🔒 **Validación profesional**: recordatorio de revisión agronómica.  
+**TerraGem** is a mobile tool that allows users to **interpret soil analysis results** through a **generative artificial intelligence** model (Google Gemini).  
+Based on the physicochemical values of the soil, the app generates **personalized management recommendations** according to crop type, climate, and terrain conditions.
+
+The system integrates multiple technological services:
+
+- **Flutter:** cross-platform development for Android and iOS.  
+- **Supabase:** cloud backend for authentication and data storage.  
+- **Gemini API:** artificial intelligence for semantic interpretation of soil analysis.  
+- **OpenWeatherMap:** real-time weather forecast module.  
+- **Google Maps API:** geographic visualization and location of agricultural stores.
 
 ---
 
-## 🧩 Estructura del Proyecto
+## 🌾 Main Features
+
+- 🔍 **Automatic interpretation** of physicochemical soil parameters.  
+- 🧠 **Generative AI (Gemini API)** for contextual analysis and personalized recommendations.  
+- ☁️ **Supabase** for managing users, crops, and historical records.  
+- 🌦️ **Local weather** integrated via OpenWeatherMap API.  
+- 📜 **PDF history** of results with professional export.  
+- 🗺️ **Interactive map** with Google Maps to locate agricultural stores.  
+- 📱 **Modern, responsive interface** designed in Flutter.  
+- 🔒 **Professional validation**: reminder for agronomic review.  
+
+---
+
+## 🧩 Project Structure
 ```
 lib/
-├── models/                    # Modelos de datos
+├── models/                    # Data models
 │   ├── clima.dart
 │   ├── cultivo.dart
 │   ├── parametro.dart
 │   ├── suelo.dart
 │   └── usuario_contexto.dart
 │
-├── screens/                   # Interfaces gráficas (UI)
+├── screens/                   # Graphical interfaces (UI)
 │   ├── analisis/
 │   │   └── interpretacion_general_screen.dart
 │   ├── auth/
@@ -66,47 +66,47 @@ lib/
 │       ├── parametros_suelo_screen.dart
 │       └── select_tipo_suelo_screen.dart
 │
-├── services/                  # Lógica de negocio y APIs
+├── services/                  # Business logic and APIs
 │   ├── auth_service.dart
 │   ├── clima_service.dart
 │   ├── cultivo_service.dart
 │   ├── cultivo_area_service.dart
-│   ├── ia_service.dart        # Comunicación con Gemini API
+│   ├── ia_service.dart        # Communication with Gemini API
 │   ├── parametro_service.dart
 │   ├── suelo_service.dart
 │   ├── historial_service.dart
 │   └── usuario_contexto_service.dart
 │
-└── main.dart                  # Punto de entrada principal
+└── main.dart                  # Main entry point
 ```
 
 ---
 
-## 🧱 Arquitectura de Software
+## 🧱 Software Architecture
 
-- **Frontend móvil:** Flutter (Dart)
-- **Backend y Base de Datos:** Supabase (PostgreSQL)
-- **Motor de IA:** Gemini API (Google AI)
-- **Servicios externos:** 
-  - OpenWeatherMap (clima)
-  - Google Maps API (geolocalización y mapas)
-- **Control de versiones:** GitHub
-- **Generación de PDFs:** Package `pdf` de Flutter
+- **Mobile Frontend:** Flutter (Dart)
+- **Backend and Database:** Supabase (PostgreSQL)
+- **AI Engine:** Gemini API (Google AI)
+- **External Services:** 
+  - OpenWeatherMap (weather)
+  - Google Maps API (geolocation and maps)
+- **Version Control:** GitHub
+- **PDF Generation:** Flutter `pdf` package
 
 ---
-## 🧭 Diagrama de Arquitectura
+## 🧭 Architecture Diagram
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    USUARIO FINAL                        │
-│                  (Agricultor/Agrónomo)                  │
+│                      END USER                           │
+│                 (Farmer / Agronomist)                   │
 └──────────────────────┬──────────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────────┐
-│              APLICACIÓN MÓVIL FLUTTER                   │
+│              FLUTTER MOBILE APPLICATION                 │
 │  ┌──────────┬──────────┬──────────┬──────────────────┐ │
-│  │  Login/  │  Análisis│ Historial│    Mapas &       │ │
-│  │ Registro │  Suelo   │   PDF    │    Clima         │ │
+│  │  Login/  │   Soil   │  PDF     │    Maps &        │ │
+│  │ Register │ Analysis │ History  │    Weather       │ │
 │  └──────────┴──────────┴──────────┴──────────────────┘ │
 └──────────────────────┬──────────────────────────────────┘
                        │
@@ -116,98 +116,98 @@ lib/
 ┌──────────────┐ ┌──────────┐ ┌─────────────────┐
 │   SUPABASE   │ │  GEMINI  │ │ OPENWEATHERMAP  │
 │  (Backend)   │ │   API    │ │   & GOOGLE      │
-│              │ │   (IA)   │ │     MAPS        │
+│              │ │   (AI)   │ │     MAPS        │
 │ • Auth       │ │          │ │                 │
-│ • PostgreSQL │ │ • NLP    │ │ • Clima         │
-│ • Storage    │ │ • Gemini │ │ • Geolocalización│
+│ • PostgreSQL │ │ • NLP    │ │ • Weather       │
+│ • Storage    │ │ • Gemini │ │ • Geolocation   │
 └──────────────┘ └──────────┘ └─────────────────┘
 ```
 
 ---
 
-## ⚙️ Instalación y Configuración
+## ⚙️ Installation and Configuration
 
-### 🪶 1. Clonar el repositorio
+### 🪶 1. Clone the repository
 ```bash
-git clone https://github.com/<tu_usuario>/terragem.git
+git clone https://github.com/<your_username>/terragem.git
 cd terragem
 ```
 
-### 📦 2. Instalar dependencias
+### 📦 2. Install dependencies
 ```bash
 flutter pub get
 ```
 
-### 🔐 3. Crear archivo `.env` en la raíz del proyecto
+### 🔐 3. Create a `.env` file in the project root
 ```env
-# 🌱 CONFIGURACIÓN DE TERRAGEM
+# 🌱 TERRAGEM CONFIGURATION
 
 # Supabase
 SUPABASE_URL=https://<your_project>.supabase.co
 SUPABASE_ANON_KEY=<your_supabase_anon_key>
 
-# Google Gemini (IA generativa)
+# Google Gemini (generative AI)
 GEMINI_API_KEY=<your_gemini_api_key>
 
-# OpenWeatherMap (pronóstico climático)
+# OpenWeatherMap (weather forecast)
 OPENWEATHER_API_KEY=<your_openweathermap_key>
 
-# Google Maps (mapas interactivos)
+# Google Maps (interactive maps)
 GOOGLE_MAPS_API_KEY=<your_google_maps_key>
 ```
 
-### ▶️ 4. Ejecutar la aplicación
+### ▶️ 4. Run the application
 ```bash
 flutter run
 ```
 
 ---
 
-## 🧪 Metodología de Desarrollo
+## 🧪 Development Methodology
 
-El desarrollo de TerraGem se realizó bajo la metodología ágil **RAD (Rapid Application Development)**:
+TerraGem was developed using the **RAD (Rapid Application Development)** agile methodology:
 
-1. **Levantamiento de requisitos:** identificación de variables del suelo y necesidades del usuario.
-2. **Diseño de prototipos:** construcción iterativa de interfaces en Flutter.
-3. **Integración de APIs:** conexión con Gemini, Supabase, OpenWeatherMap y Google Maps.
-4. **Validación funcional:** pruebas con análisis de suelo reales.
-5. **Despliegue:** ejecución en entorno emulado y almacenamiento en la nube.
-
----
-
-## 📈 Resultados del Sistema
-
-| Métrica | Valor |
-|---------|-------|
-| Coincidencia con especialistas agrónomos | 92% |
-| Estabilidad funcional en pruebas | 94% |
-| Tiempo promedio de respuesta | < 5 segundos |
-| Satisfacción del usuario | Alta (evaluación interna) |
+1. **Requirements gathering:** identification of soil variables and user needs.
+2. **Prototype design:** iterative construction of interfaces in Flutter.
+3. **API integration:** connection with Gemini, Supabase, OpenWeatherMap, and Google Maps.
+4. **Functional validation:** testing with real soil analyses.
+5. **Deployment:** execution in an emulated environment with cloud storage.
 
 ---
 
-## 🌍 Impacto y Alineación con ODS
+## 📈 System Results
 
-TerraGem contribuye al cumplimiento de los siguientes **Objetivos de Desarrollo Sostenible (ODS)**:
-
-- 🥦 **ODS 2:** Hambre Cero
-- 🪴 **ODS 12:** Producción y Consumo Responsables
-- 🌳 **ODS 15:** Vida de Ecosistemas Terrestres
-
----
-
-## 🚀 Mejoras Futuras
-
-- 🔌 Implementación de **modo offline**.
-- 🌾 Expansión del modelo a nuevos cultivos y tipos de suelo.
-- 🔍 Integración de una **API REST** para interoperabilidad.
-- 📊 Dashboards estadísticos con métricas de fertilidad.
-- 🤖 Incorporación de **análisis predictivo** de rendimiento agrícola.
-- 🌐 Soporte multiidioma (inglés, quechua).
+| Metric | Value |
+|--------|-------|
+| Match rate with agronomic specialists | 92% |
+| Functional stability in tests | 94% |
+| Average response time | < 5 seconds |
+| User satisfaction | High (internal evaluation) |
 
 ---
 
-## 📦 Dependencias Principales
+## 🌍 Impact and Alignment with SDGs
+
+TerraGem contributes to the fulfillment of the following **Sustainable Development Goals (SDGs)**:
+
+- 🥦 **SDG 2:** Zero Hunger
+- 🪴 **SDG 12:** Responsible Consumption and Production
+- 🌳 **SDG 15:** Life on Land
+
+---
+
+## 🚀 Future Improvements
+
+- 🔌 Implementation of **offline mode**.
+- 🌾 Expansion of the model to new crops and soil types.
+- 🔍 Integration of a **REST API** for interoperability.
+- 📊 Statistical dashboards with fertility metrics.
+- 🤖 Incorporation of **predictive analysis** of agricultural yield.
+- 🌐 Multilingual support (Spanish, Quechua).
+
+---
+
+## 📦 Main Dependencies
 ```yaml
 dependencies:
   flutter:
@@ -225,45 +225,45 @@ dependencies:
 
 ---
 
-## 👩‍💻 Equipo de Desarrollo
+## 👩‍💻 Development Team
 
-- **Autora Principal:** Carolay Delgado Santiago – Desarrolladora e investigadora responsable
-- **Investigador asociado:** Dayana Cerron Vilca – Investigadora 
-- **Asesor Académico:** Alex Pacheco-Pumaleque
-- **Entidad financiadora:** Dirección de Innovación y Transferencia Tecnológica (DITT) – UNDC
-
----
-
-## 📜 Licencia
-
-Este proyecto se distribuye bajo la **Licencia MIT**.  
-**TerraGem – UNDC 2025** fue desarrollado con fines de investigación e innovación tecnológica, orientado al uso de la inteligencia artificial para una agricultura sostenible.
+- **Lead Author:** Carolay Delgado Santiago – Lead Developer and Researcher
+- **Associate Researcher:** Dayana Cerron Vilca – Researcher
+- **Academic Advisor:** Alex Pacheco-Pumaleque
+- **Funding Entity:** Directorate of Innovation and Technology Transfer (DITT) – UNDC
 
 ---
 
-## 💡 Disclaimer Técnico
+## 📜 License
 
-⚠️ **TerraGem** es una herramienta de apoyo para la interpretación de análisis de suelo. **No reemplaza la asesoría de un ingeniero agrónomo** ni los análisis confirmatorios en laboratorio. Se recomienda validar siempre las sugerencias generadas antes de su aplicación en campo.
+This project is distributed under the **MIT License**.  
+**TerraGem – UNDC 2025** was developed for research and technological innovation purposes, aimed at the use of artificial intelligence for sustainable agriculture.
+
+---
+
+## 💡 Technical Disclaimer
+
+⚠️ **TerraGem** is a support tool for the interpretation of soil analyses. **It does not replace the advice of an agronomic engineer** or confirmatory laboratory analyses. It is always recommended to validate the generated suggestions before applying them in the field.
 
 ---
 
 
-## 🤝 Contribuciones
+## 🤝 Contributions
 
-Las contribuciones son bienvenidas. Si deseas colaborar:
+Contributions are welcome. If you wish to collaborate:
 
-1. Haz un **fork** del proyecto
-2. Crea una **rama** para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
-3. Haz **commit** de tus cambios (`git commit -m 'Agregar nueva funcionalidad'`)
-4. Haz **push** a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un **Pull Request**
+1. **Fork** the project
+2. Create a **branch** for your feature (`git checkout -b feature/new-feature`)
+3. **Commit** your changes (`git commit -m 'Add new feature'`)
+4. **Push** to the branch (`git push origin feature/new-feature`)
+5. Open a **Pull Request**
 
 ---
 
-## 📧 Contacto
+## 📧 Contact
 
 - **Email:** carolaydelgadosantiago@gmail.com
-- **Universidad:** [Universidad Nacional de Cañete](https://www.undc.edu.pe)
+- **University:** [National University of Cañete](https://www.undc.edu.pe)
 - **GitHub:** [https://github.com/carolayds/terragem_app]
 
 ---
