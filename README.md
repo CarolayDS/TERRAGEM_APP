@@ -172,18 +172,6 @@ TerraGem was developed using the **RAD (Rapid Application Development)** agile m
 3. **API integration:** connection with Gemini, Supabase, OpenWeatherMap, and Google Maps.
 4. **Functional validation:** testing with real soil analyses.
 5. **Deployment:** execution in an emulated environment with cloud storage.
-
----
-
-## 📈 System Results
-
-| Metric | Value |
-|--------|-------|
-| Match rate with agronomic specialists | 92% |
-| Functional stability in tests | 94% |
-| Average response time | < 5 seconds |
-| User satisfaction | High (internal evaluation) |
-
 ---
 
 ## 🌍 Impact and Alignment with SDGs
